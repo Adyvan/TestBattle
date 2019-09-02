@@ -32,6 +32,12 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\Unit.cs" />
+    <Compile Include="Entities\PowerType.cs" />
+    <Compile Include="Entities\Power.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
