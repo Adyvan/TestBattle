@@ -49,9 +49,17 @@ namespace TestBattle
         private Tuple<Unit[], Unit[]> BattleTick(Unit[] army1, Unit[] army2)
         {
             _logger.Log($"////////////// BatleTick");
-            Attack(army1, army2);
+            var army1Units = GetBattleUnits(army1);
+            var army2Units = GetBattleUnits(army2);
 
-            Attack(army2, army1);
+            Attack(army1Units, army2Units);
+
+            Attack(army2Units, army1Units);
+
+            foreach (var unit in army1Units.Concat(army2Units).Where(x => !x.Unit.IsDead))
+            {
+                unit.Unit.Fury += GetAffitionalFury(unit.DamageDone, unit.DamageTaken, unit.Frag);
+            }
 
             var result = new Tuple<Unit[], Unit[]>(
                 army1.Where(x => !x.IsDead).ToArray(),
@@ -67,11 +75,21 @@ namespace TestBattle
             return result;
         }
 
-        private void Attack(Unit[] defendsArmy, Unit[] atackArmy)
+        private BattleUnit[] GetBattleUnits(Unit[] units)
+        {
+            return units.Select(x => new BattleUnit(x)).ToArray();
+        }
+
+        private float GetAffitionalFury(float damageDone, float damageTaken, float frag)
+        {
+            return (damageTaken * 2 + damageDone * 0.5f + frag * 10) / 100f;
+        }
+
+        private void Attack(BattleUnit[] defendsArmy, BattleUnit[] atackArmy)
         {
             foreach(var attackItem in atackArmy)
             {
-                var defendItem = defendsArmy.FirstOrDefault(x => !x.IsDead);
+                var defendItem = defendsArmy.FirstOrDefault(x => !x.Unit.IsDead);
 
                 if (defendItem == null) break; //has killed all army
 
@@ -79,31 +97,49 @@ namespace TestBattle
             }
         }
 
-        private void Attack(Unit defends, Unit attack)
+        private void Attack(BattleUnit defends, BattleUnit attack)
         {
-            var damages = GetCurrentDamage(attack);
-            _logger.Log($" {attack.Name} attack {defends.Name}");
+            var damages = GetCurrentDamage(attack.Unit);
+            _logger.Log($" {attack.Unit.Name} attack {defends.Unit.Name}");
             foreach (var damage in damages)
             {
-                Attack(ref defends, damage);
+                var damageValue = Attack(ref defends.Unit, damage);
 
-                if (defends.IsDead) break;
+                defends.DamageTaken += damageValue;
+                attack.DamageDone += damageValue;
+
+                if (defends.Unit.IsDead)
+                {
+                    attack.Frag++;
+                    break;
+                }
             }
         }
 
-        private void Attack(ref Unit defends, Power damage)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="defends"></param>
+        /// <param name="damage"></param>
+        /// <returns>Damage</returns>
+        private float Attack(ref Unit defends, Power damage)
         {
+            var damageValue = 0f;
             if (!IsDodge(defends.Dodge, damage.Type))
             {
                 var resist = defends.Resistance.FirstOrDefault(x => x.Type == damage.Type);
-                defends.Health -= damage.Value * (1 - resist.Value);
+                damageValue = damage.Value * (1 - resist.Value);
 
-                _logger.Log($"  {defends.Name} has {damage.Type} damage {damage.Value * (1 - resist.Value)}");
+                defends.Health -= damageValue;
+
+                _logger.Log($"  {defends.Name} has {damage.Type} damage {damageValue}");
             }
             else
             {
                 _logger.Log($"  {defends.Name} has evade {damage.Type} damage");
             }
+
+            return damageValue;
         }
 
         private Power[] GetCurrentDamage(Unit attack)

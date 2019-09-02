@@ -22,6 +22,7 @@ namespace TestBattle.Entities
 
         public bool IsFury => Fury >= 1;
 
+
         public Unit Copy()
         {
             return new Unit

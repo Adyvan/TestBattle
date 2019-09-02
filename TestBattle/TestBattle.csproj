@@ -39,6 +39,7 @@
     <Compile Include="Utility\RandomHelper.cs" />
     <Compile Include="Utility\ILog.cs" />
     <Compile Include="Utility\ConsoleLogging.cs" />
+    <Compile Include="Entities\BattleUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
