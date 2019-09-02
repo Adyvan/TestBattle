@@ -40,8 +40,8 @@ namespace TestBattle
                     Name = "Воин 3",
                     Health = 100,
                     Fury = 0,
-                    Damage = new Power[] { new Power {Type = PowerType.Physical, Value = 5 } },
-                    ActiveDamage = new Power[] { new Power {Type = PowerType.Physical, Value = 10 } },
+                    Damage = new Power[] { new Power {Type = PowerType.Magical, Value = 7 } },
+                    ActiveDamage = new Power[] { new Power {Type = PowerType.Magical, Value = 10 } },
                     Resistance = new Power[] {
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
@@ -52,13 +52,18 @@ namespace TestBattle
                     Name = "Воин 4",
                     Health = 100,
                     Fury = 0,
-                    Damage = new Power[] { new Power {Type = PowerType.Physical, Value = 5 } },
-                    ActiveDamage = new Power[] { new Power {Type = PowerType.Physical, Value = 10 } },
+                    Damage = new Power[] {
+                        new Power {Type = PowerType.Physical, Value = 5 },
+                        new Power {Type = PowerType.Magical, Value = 7 },},
+
+                    ActiveDamage = new Power[] {
+                        new Power {Type = PowerType.Physical, Value = 10 },
+                        new Power {Type = PowerType.Magical, Value = 14 } },
                     Resistance = new Power[] {
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
-                    Dodge = 0.09f,
+                    Dodge = 0.15f,
                 },
                 new Unit {
                     Name = "Воин 5",
@@ -108,8 +113,8 @@ namespace TestBattle
                     Name = "Воин 13",
                     Health = 100,
                     Fury = 0,
-                    Damage = new Power[] { new Power {Type = PowerType.Physical, Value = 5 } },
-                    ActiveDamage = new Power[] { new Power {Type = PowerType.Physical, Value = 10 } },
+                    Damage = new Power[] { new Power {Type = PowerType.Magical, Value = 7 } },
+                    ActiveDamage = new Power[] { new Power {Type = PowerType.Magical, Value = 10 } },
                     Resistance = new Power[] {
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
@@ -120,13 +125,18 @@ namespace TestBattle
                     Name = "Воин 14",
                     Health = 100,
                     Fury = 0,
-                    Damage = new Power[] { new Power {Type = PowerType.Physical, Value = 5 } },
-                    ActiveDamage = new Power[] { new Power {Type = PowerType.Physical, Value = 10 } },
+                    Damage = new Power[] {
+                        new Power {Type = PowerType.Physical, Value = 5 },
+                        new Power {Type = PowerType.Magical, Value = 7 },},
+
+                    ActiveDamage = new Power[] {
+                        new Power {Type = PowerType.Physical, Value = 10 },
+                        new Power {Type = PowerType.Magical, Value = 14 } },
                     Resistance = new Power[] {
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
-                    Dodge = 0.09f,
+                    Dodge = 0.15f,
                 },
                 new Unit {
                     Name = "Воин 15",
