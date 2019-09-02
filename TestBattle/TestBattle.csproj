@@ -35,9 +35,12 @@
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Entities\PowerType.cs" />
     <Compile Include="Entities\Power.cs" />
+    <Compile Include="BattleManager.cs" />
+    <Compile Include="Utility\RandomHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
+    <Folder Include="Utility\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
