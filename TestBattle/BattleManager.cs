@@ -8,12 +8,17 @@ namespace TestBattle
 {
     public class BattleManager
     {
-        public BattleManager()
+        readonly ILog _logger;
+
+        public BattleManager(ILog logger)
         {
+            _logger = logger;
         }
 
         public void Battle(Unit[] army1, Unit[] army2)
         {
+            _logger.Log($"############## StartBattle");
+
             var localArmy1 = army1;
             var localArmy2 = army2;
 
@@ -23,11 +28,27 @@ namespace TestBattle
                 localArmy1 = armies.Item1;
                 localArmy2 = armies.Item2;
             }
+
+            if(localArmy1.Length > 0)
+            {
+                _logger.Log($"Frst Army Win!");
+            }
+            else if (localArmy2.Length > 0)
+            {
+                _logger.Log($"Second Army Win!");
+            }
+            else
+            {
+                _logger.Log($"Draw!");
+            }
+
+            _logger.Log($"############## EndBatle");
         }
 
 
         private Tuple<Unit[], Unit[]> BattleTick(Unit[] army1, Unit[] army2)
         {
+            _logger.Log($"////////////// BatleTick");
             Attack(army1, army2);
 
             Attack(army2, army1);
@@ -36,6 +57,13 @@ namespace TestBattle
                 army1.Where(x => !x.IsDead).ToArray(),
                 army2.Where(x => !x.IsDead).ToArray());
 
+            _logger.Log($"Deads:");
+            foreach (var unit in army1.Concat(army2).Where(x=>x.IsDead))
+            {
+                _logger.Log($" {unit.Name}");
+            }
+
+            _logger.Log($"////////////// end BatleTick");
             return result;
         }
 
@@ -54,7 +82,8 @@ namespace TestBattle
         private void Attack(Unit defends, Unit attack)
         {
             var damages = GetCurrentDamage(attack);
-            foreach(var damage in damages)
+            _logger.Log($" {attack.Name} attack {defends.Name}");
+            foreach (var damage in damages)
             {
                 Attack(ref defends, damage);
 
@@ -68,6 +97,12 @@ namespace TestBattle
             {
                 var resist = defends.Resistance.FirstOrDefault(x => x.Type == damage.Type);
                 defends.Health -= damage.Value * (1 - resist.Value);
+
+                _logger.Log($"  {defends.Name} has {damage.Type} damage {damage.Value * (1 - resist.Value)}");
+            }
+            else
+            {
+                _logger.Log($"  {defends.Name} has evade {damage.Type} damage");
             }
         }
 

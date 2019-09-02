@@ -37,6 +37,8 @@
     <Compile Include="Entities\Power.cs" />
     <Compile Include="BattleManager.cs" />
     <Compile Include="Utility\RandomHelper.cs" />
+    <Compile Include="Utility\ILog.cs" />
+    <Compile Include="Utility\ConsoleLogging.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using TestBattle.Entities;
+using TestBattle.Utility;
 
 namespace TestBattle
 {
@@ -19,6 +20,7 @@ namespace TestBattle
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
+                    Dodge = 0.09f,
                 },
 
                 new Unit {
@@ -31,6 +33,7 @@ namespace TestBattle
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
+                    Dodge = 0.09f,
                 },
 
                 new Unit {
@@ -43,6 +46,7 @@ namespace TestBattle
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
+                    Dodge = 0.09f,
                 },
                 new Unit {
                     Name = "Воин 4",
@@ -54,6 +58,7 @@ namespace TestBattle
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
+                    Dodge = 0.09f,
                 },
                 new Unit {
                     Name = "Воин 5",
@@ -65,6 +70,7 @@ namespace TestBattle
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
+                    Dodge = 0.09f,
                 },
 
 
@@ -82,6 +88,7 @@ namespace TestBattle
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
+                    Dodge = 0.09f,
                 },
 
                 new Unit {
@@ -94,6 +101,7 @@ namespace TestBattle
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
+                    Dodge = 0.09f,
                 },
 
                 new Unit {
@@ -106,6 +114,7 @@ namespace TestBattle
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
+                    Dodge = 0.09f,
                 },
                 new Unit {
                     Name = "Воин 14",
@@ -117,6 +126,7 @@ namespace TestBattle
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
+                    Dodge = 0.09f,
                 },
                 new Unit {
                     Name = "Воин 15",
@@ -128,13 +138,16 @@ namespace TestBattle
                         new Power {Type = PowerType.Physical, Value = 0.1f },
                         new Power {Type = PowerType.Magical, Value = 0.2f }
                     },
+                    Dodge = 0.09f,
                 },
             };
 
-
-            var bm = new BattleManager();
+            var cl = new ConsoleLogging();
+            var bm = new BattleManager(cl);
 
             bm.Battle(army1, army2);
+
+            Console.ReadLine();
         }
     }
 }

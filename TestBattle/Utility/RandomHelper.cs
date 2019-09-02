@@ -3,7 +3,7 @@ namespace TestBattle.Utility
 {
     public static class RandomHelper
     {
-        private static Random random = new Random();
+        private static Random random = new Random((int)DateTime.Now.Ticks);
 
         public static float GetNext(float min = 0, float max = 1)
         {
